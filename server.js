@@ -10,6 +10,11 @@ const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'DiGong';
 const uploads = multer({ dest: 'uploads/' }); 
 
+// 교차 출처 공유 허용
+const cors = require('cors');
+app.use(cors());
+app.use(express.json());
+
 connection = mysql.createConnection({
   host:'database',
   user:'root',
@@ -25,12 +30,6 @@ connection.connect((err)=>{
   }
   console.log('MYSQL 연결 성공...')
 })
-
-// 교차 출처 공유 허용
-const cors = require('cors');
-app.use(cors());
-app.use(express.json());
-
 
 // 로그인
 app.post('/login', async (req, res) => {
